@@ -5,7 +5,8 @@ exports.up = function (knex, Promise) {
     t.increments('ID').unsigned().primary(),
     t.string('Language'),
     t.string('Tpoic'),
-    t.decimal('Payment')
+    t.decimal('Payment'),
+    t.boolean('Leftparagraph')
   })
 }
 

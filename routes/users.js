@@ -1,11 +1,6 @@
 var express = require('express')
 var router = express.Router()
 
-/* GET users listing. */
-// router.get('/', function (req, res, next) {
-//   res.send('respond with a resource')
-// })
-
 router.post('/request', function (req, res, next) {
   if (!req.body.language || !req.body.topic || !req.body.payment) {
     return res.status(400).send('Not enough parameter')
@@ -18,5 +13,10 @@ router.post('/request', function (req, res, next) {
     res.send('OK')
   }
 })
+
+// router.get('/receive', function (req, res, next) {
+
+//   return 
+// })
 
 module.exports = router
