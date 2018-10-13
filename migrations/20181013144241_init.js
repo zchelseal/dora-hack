@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('Passage', function (t) {
     t.increments('ID').unsigned().primary(),
