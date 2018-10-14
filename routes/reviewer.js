@@ -25,8 +25,8 @@ router.get('/view', function (req, res, next) {
           let originalText = ''
           let translatedText = ''
           for (let i = 0; i < rows.length; i++) {
-            originalText += '\n'+rows[i].OriginalText
-            translatedText += '\n'+rows[i].TranslatedText
+            originalText += (i == 0)? rows[i].OriginalText : '\n'+rows[i].OriginalText
+            translatedText += (i == 0)? rows[i].TranslatedText : '\n'+rows[i].TranslatedText
           }
           console.log(originalText)
           console.log(translatedText)
