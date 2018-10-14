@@ -10,13 +10,16 @@ var knex = require('knex')({
     database: 'hackathon'
   }
 })
+var os = require('os');
+
 
 router.post('/request', function (req, res, next) {
   try{
     if (!req.body.from || !req.body.to || !req.body.contract || !req.body.doc || (!req.body.payment && req.body.payment!=0)) {
       return res.status(400).send('Not enough parameter')
     } else {
-      const splitPassage = req.body.doc.split('/\r?\n/')
+      const splitPassage = req.body.doc.split(os.EOL);
+      //const splitPassage = req.body.doc.split('/\r?\n/')
       const snippet = req.body.doc.substr(0, 150)
       const job = {
         'FromLanguage': req.body.from,
