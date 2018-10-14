@@ -21,5 +21,5 @@ exports.up = function (knex, Promise) {
 }
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('Passage')
+  return knex.schema.dropTable('Passage').drop('Paragraph')
 }
