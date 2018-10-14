@@ -45,7 +45,7 @@ router.get('/view', function (req, res, next) {
   // TODO: searching & filtering
   // retrieve all jobs that have paragraphs left
   try{
-    knex.raw('SELECT "ID", "ParagraphIndex", "Snippet", "FromLanguage", "ToLanguage", "Payment", "ContractAddress" FROM "Passage" RIGHT JOIN "Paragraph" on "Passage"."ID" = "Paragraph"."PassageID"')
+    knex.raw('SELECT "ID", "ParagraphIndex", "Snippet", "FromLanguage", "ToLanguage", "Payment", "ContractAddress" FROM "Passage" RIGHT JOIN "Paragraph" on "Passage"."ID" = "Paragraph"."PassageID" WHERE "AllTranslated" <> true')
     //knex.from('Passage').select('ID', 'FromLanguage', 'ToLanguage', 'Payment', 'Snippet', 'ContractAddress').where('AllTranslated', false)
     .then(rows => {
       console.log(rows.rows)
