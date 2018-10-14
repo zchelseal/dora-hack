@@ -25,7 +25,7 @@ function publishJob (bodyText, fromLanguage, toLanguage, payment) {
   return knex('Passage').insert(job).returning('ID')
     .then(id => {
       // parse and insert paragraphs
-      let p = []
+      let p = [];
       for (let i = 0; i < paragraphs.length; i++) {
         p.push({
           'PassageID': id[0],
