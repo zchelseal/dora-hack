@@ -14,7 +14,7 @@ var knex = require('knex')({
 router.get('/view', function (req, res, next) {
   try{
     // retrieve all jobs that are "allTranslated" but not reviewed
-    knex('Passage').select('ID').where({'AllTranslated':true, 'Reviewed':false})
+    knex('Passage').select('ID', 'ContractAddress').where({'AllTranslated':true, 'Reviewed':false})
     .then(passageIDs => {
       listToReview = []
       for (let i = 0; i < passageIDs.length; i++) {
@@ -37,7 +37,8 @@ router.get('/view', function (req, res, next) {
             listToReview.push({
               "originalText": originalText,
               "translatedText": translatedText,
-              "PassageID": passageIDs[i].ID
+              "PassageID": passageIDs[i].ID,
+              "ContractAddress": passageIDs[i].ContractAddress,
             })
             if (i == passageIDs.length - 1){
               res.send(listToReview)
