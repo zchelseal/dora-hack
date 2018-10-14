@@ -15,7 +15,6 @@ exports.up = function (knex, Promise) {
     t.string('OriginalText');
     t.string('TranslatedText');
     t.boolean('Assigned');
-    t.string('TranslatorID');
     t.boolean('Translated');
     t.primary(['PassageID', 'ParagraphIndex'])
   })
