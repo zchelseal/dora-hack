@@ -37,7 +37,7 @@ var knex = require('knex')({
         from_language: 'Chinese',
         to_language: 'English',
         payment: 0.45
-        // leftParagraph: '10'
+        contractAddress: '10'
       }]
 */
 router.get('/view', function (req, res, next) {
@@ -45,9 +45,11 @@ router.get('/view', function (req, res, next) {
   // TODO: searching & filtering
   // retrieve all jobs that have paragraphs left
   try{
-    knex.from('Passage').select('ID', 'FromLanguage', 'ToLanguage', 'Payment', 'Snippet', 'ContractAddress').where('AllTranslated', false)
+    knex.raw('SELECT "ID", "ParagraphIndex", "Snippet", "FromLanguage", "ToLanguage", "Payment", "ContractAddress" FROM "Passage" RIGHT JOIN "Paragraph" on "Passage"."ID" = "Paragraph"."PassageID"')
+    //knex.from('Passage').select('ID', 'FromLanguage', 'ToLanguage', 'Payment', 'Snippet', 'ContractAddress').where('AllTranslated', false)
     .then(rows => {
-      res.send(rows)
+      console.log(rows.rows)
+      res.send(rows.rows)
     })
   }
   catch(err) {
