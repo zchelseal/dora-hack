@@ -7,7 +7,9 @@ exports.up = function (knex, Promise) {
     t.string('ToLanguage'),
     t.decimal('Payment'),
     t.string('Snippet'),
+    t.string('ContractAddress'),
     t.boolean('AllTranslated'),
+    t.string('TranslatedText', 1000),
     t.boolean('Reviewed')
   })
   .createTable('Paragraph', function (t) {

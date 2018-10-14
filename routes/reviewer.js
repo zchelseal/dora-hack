@@ -18,7 +18,7 @@ router.get('/view', function (req, res, next) {
     .then(passageIDs => {
       listToReview = []
       for (let i = 0; i < passageIDs.length; i++) {
-        // for each article, one array of paragraphs
+        // for each article, create one array of paragraphs
         knex('Paragraph').select('OriginalText', 'TranslatedText', 'ParagraphIndex').where('PassageID', passageIDs[i].ID)
         .then(rows => {
           // aggregate translatedText and originalText
@@ -30,14 +30,19 @@ router.get('/view', function (req, res, next) {
           }
           console.log(originalText)
           console.log(translatedText)
-          listToReview.push({
-            "originalText": originalText,
-            "translatedText": translatedText,
-            "PassageID": passageIDs[i].ID
+          // store translatedText in passage table
+          knex('Passage').update('TranslatedText', translatedText).where('ID', passageIDs[i].ID)
+          .then(r => {
+            console.log('update done');
+            listToReview.push({
+              "originalText": originalText,
+              "translatedText": translatedText,
+              "PassageID": passageIDs[i].ID
+            })
+            if (i == passageIDs.length - 1){
+              res.send(listToReview)
+            }
           })
-          if (i == passageIDs.length - 1){
-            res.send(listToReview)
-          }
         })
       }
     })
