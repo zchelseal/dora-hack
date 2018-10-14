@@ -24,9 +24,4 @@ router.get('/receive', function (req, res, next) {
   res.send(result)
 })
 
-// router.get('/receive', function (req, res, next) {
-
-//   return 
-// })
-
 module.exports = router
