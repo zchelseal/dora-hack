@@ -5,13 +5,20 @@ exports.up = function (knex, Promise) {
     t.increments('ID').unsigned().primary(),
     t.string('Fromlanguage'),
     t.string('Tolanguage'),
-    t.string('Topic'),
-    t.decimal('Payment')
+    t.decimal('Payment'),
+    t.boolean('AllTranslated'),
+    t.boolean('Reviewed')
   })
   .createTable('Paragraph', function (t) {
-    t.integer('ID').references('Passage.ID')
+    t.integer('PassageID').references('Passage.ID')
+    t.integer('ParagraphIndex');
+    t.string('OriginalText');
+    t.string('TranslatedText');
+    t.boolean('Assigned');
+    t.string('TranslatorID');
+    t.boolean('Translated');
+    t.primary(['PassageID', 'ParagraphIndex'])
   })
-
 }
 
 exports.down = function (knex, Promise) {
