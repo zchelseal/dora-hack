@@ -6,6 +6,7 @@ var logger = require('morgan')
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var translatorRouter = require('./routes/translator')
+var reviewerRouter = require('./routes/reviewer')
 
 var app = express()
 const port = 3000
@@ -19,6 +20,7 @@ app.use(cookieParser())
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/translator', translatorRouter)
+app.use('/reviewer', reviewerRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
