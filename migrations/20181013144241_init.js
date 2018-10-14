@@ -6,6 +6,7 @@ exports.up = function (knex, Promise) {
     t.string('Fromlanguage'),
     t.string('Tolanguage'),
     t.decimal('Payment'),
+    t.string('Snippet'),
     t.boolean('AllTranslated'),
     t.boolean('Reviewed')
   })
@@ -21,5 +22,5 @@ exports.up = function (knex, Promise) {
 }
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('Passage').drop('Paragraph')
+  return knex.schema.dropTable('Paragraph').drop('Passage')
 }
