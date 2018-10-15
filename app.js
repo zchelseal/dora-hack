@@ -2,9 +2,12 @@ var createError = require('http-errors')
 var express = require('express')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
+var cors = require('cors')
 
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
+var translatorRouter = require('./routes/translator')
+var reviewerRouter = require('./routes/reviewer')
 
 var app = express()
 const port = 3000
@@ -12,11 +15,15 @@ const port = 3000
 // view engine setup
 app.use(logger('dev'))
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+
+app.use(cors())
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
+app.use('/translator', translatorRouter)
+app.use('/reviewer', reviewerRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
